@@ -21,6 +21,12 @@ export const Navbar = () => {
                     >
                         Countries
                     </NavLink>
+                    <NavLink 
+                        className={ ({isActive}) => `nav-item nav-link ${ isActive } ? 'active' : '' `} 
+                        to="/countries"
+                    >
+                        Continents
+                    </NavLink>
 
                 </div>
             </div>
