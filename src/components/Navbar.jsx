@@ -34,6 +34,7 @@ export const Navbar = () => {
                 </div>
             </div> */}
             <select name="regions" id="regions" value={inputValue} onChange={handleChange}>
+                <option value="Global">Global Population</option>
                 <option value="Africa">Africa</option>
                 <option value="America">America</option>
                 <option value="Asia">Asia</option>

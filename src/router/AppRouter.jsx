@@ -9,7 +9,7 @@ export const AppRouter = () => {
     <Navbar />
     <Routes>
       <Route path="/" element={<ContinentsPage/>}/>
-      <Route path="countries" element={<CountriesPage/>}/>
+      <Route path="continent/:name" element={<CountriesPage/>}/>
     </Routes>
     </>
   )
