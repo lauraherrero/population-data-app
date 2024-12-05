@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 export const CountriesPage = () => {
   const { name } = useParams();
   const [data, setData] = useState([]);
+  const [population, setPopulation] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -29,10 +30,21 @@ export const CountriesPage = () => {
     };
     fetchCountries();
   }, [name]);
+
+  const handleFilterChange = (event) => {
+    const value = event.target.value;
+    setPopulation(value);
+  };
+
   return (
     <div>
       <h1>Countries Page</h1>
-      <input type="text" placeholder="Filter by population" />
+      <input
+        type="text"
+        placeholder="Filter by population"
+        value={population}
+        onChange={handleFilterChange}
+      />
     </div>
   );
 };
