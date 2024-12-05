@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
@@ -17,13 +18,33 @@ export const ContinentsPage = () => {
   const [population, setPopulation] = useState("");
   const [error, setError] = useState(null);
 
+  const continents = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("https://restcountries.com/v3.1/all");
         const countries = await response.json();
 
-        setData(countries);
+        const groupedData = continents.reduce((acc, continent) => {
+          acc[continent] = 0;
+          return acc;
+        }, {});
+
+        countries.forEach((country) => {
+          const continent = country.region;
+          if(continents.includes(continent)) {
+            groupedData[continent] += country.population;
+          }
+        });
+
+        const formatData = Object.entries(groupedData).map(([region, population]) => ({
+          region,
+          population,
+        }));
+
+        setData(formatData);
+        setFilteredData(formatData);
       } catch (err) {
         setError(err.message);
       }
@@ -34,7 +55,6 @@ export const ContinentsPage = () => {
   const handleFilterChange = (event) => {
     const value = event.target.value;
     setPopulation(value);
-    setFilteredData(data);
   };
 
   ChartJS.register(
