@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 export const Navbar = () => {
@@ -6,10 +5,8 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
 
-    const [inputValue, setInputValue] = useState('');
 
     const handleChange = (e) => {
-        setInputValue(e.target.value);
         const selectedContinent = e.target.value;
         if (selectedContinent === 'Global') {
             navigate('/');
@@ -20,7 +17,7 @@ export const Navbar = () => {
 
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-4">
-            <select name="regions" id="regions" value={inputValue} onChange={handleChange}>
+            <select name="regions" id="regions" onChange={handleChange}>
                 <option value="Global">Global Population</option>
                 <option value="Africa">Africa</option>
                 <option value="America">America</option>

@@ -6,12 +6,12 @@ import { ChartPopulation } from "../components/ChartPopulation";
 export const CountriesPage = () => {
   const { name } = useParams();
   const [data, setData] = useState([]);
-  const [population, setPopulation] = useState([]);
+  const [population, setPopulation] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchCountries = async () => {
+    const fetchData = async () => {
       try {
         const response = await fetch("https://restcountries.com/v3.1/all");
         const countries = await response.json();
@@ -29,7 +29,7 @@ export const CountriesPage = () => {
         setError(error);
       }
     };
-    fetchCountries();
+    fetchData();
   }, [name]);
 
   const handleFilterChange = (event) => {
@@ -54,7 +54,7 @@ export const CountriesPage = () => {
         value={population}
         onChange={handleFilterChange}
       />
-      <ChartPopulation data={filteredData} />
+      <ChartPopulation data={filteredData} label="name" value="population" />
     </div>
   );
 };
