@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { ChartPopulation } from "../components/ChartPopulation";
 
 export const CountriesPage = () => {
   const { name } = useParams();
@@ -45,6 +46,7 @@ export const CountriesPage = () => {
         value={population}
         onChange={handleFilterChange}
       />
+      <ChartPopulation data={filteredData} />
     </div>
   );
 };
