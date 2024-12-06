@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react"
+import { fetchCountriesData } from "../helpers/utils";
 
 export const useDataPopulation = (filterRegion) => {
 
@@ -9,21 +10,19 @@ export const useDataPopulation = (filterRegion) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://restcountries.com/v3.1/all');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const countries = await response.json();
+        const response = await fetchCountriesData();
 
-        let filteredCountries = countries;
+
+        let filteredCountries = response;
         if (filterRegion) {
-          filteredCountries = countries.filter((country) => country.region === filterRegion);
+          filteredCountries = response.filter((country) => country.region === filterRegion);
         }
 
         const formattedData = filteredCountries.map((country) => ({
           name: country.name.common,
           region: country.region || 'Unknown',
           population: country.population || 0,
+          img: country.flags.png,
         }));
 
         setData(formattedData);

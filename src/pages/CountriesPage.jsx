@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ChartPopulation } from "../components/ChartPopulation";
+import { fetchCountriesData } from "../helpers/utils";
 
 export const CountriesPage = () => {
   const { name } = useParams();
@@ -13,10 +14,9 @@ export const CountriesPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
-        const countries = await response.json();
+        const response = await fetchCountriesData();        
 
-        const filteredCountries = countries.filter(
+        const filteredCountries = response.filter(
           (country) => country.region === name
         );
         const formatData = filteredCountries.map((country) => ({

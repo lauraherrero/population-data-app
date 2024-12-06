@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { ChartPopulation } from "../components/ChartPopulation";
+import { fetchCountriesData } from "../helpers/utils";
 
 
 export const ContinentsPage = () => {
@@ -15,15 +16,14 @@ export const ContinentsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
-        const countries = await response.json();
+        const response = await fetchCountriesData();
 
         const groupedData = continents.reduce((acc, continent) => {
           acc[continent] = 0;
           return acc;
         }, {});
 
-        countries.forEach((country) => {
+        response.forEach((country) => {
           const continent = country.region;
           if(continents.includes(continent)) {
             groupedData[continent] += country.population;
