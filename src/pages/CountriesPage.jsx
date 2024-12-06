@@ -35,6 +35,14 @@ export const CountriesPage = () => {
   const handleFilterChange = (event) => {
     const value = event.target.value;
     setPopulation(value);
+    const numberValue = Number(value);
+    if (isNaN(numberValue) || numberValue === 0) {
+      setFilteredData(data);
+    } else {
+      setFilteredData(
+        data.filter((continent) => continent.population >= numberValue)
+      );
+    }
   };
 
   return (
