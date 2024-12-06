@@ -1,48 +1,30 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { ChartPopulation } from "../components/ChartPopulation";
-import { fetchCountriesData } from "../helpers/utils";
+import { useDataPopulation } from "../hooks/useDataPopulation";
 
 export const CountriesPage = () => {
   const { name } = useParams();
-  const [data, setData] = useState([]);
+  const { data, error } = useDataPopulation(name); 
   const [population, setPopulation] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchCountriesData();        
-
-        const filteredCountries = response.filter(
-          (country) => country.region === name
-        );
-        const formatData = filteredCountries.map((country) => ({
-          name: country.name.common,
-          population: country.population,
-        }));
-        setData(formatData);
-        setFilteredData(formatData);
-      } catch (error) {
-        setError(error);
-      }
-    };
-    fetchData();
-  }, [name]);
-
-  const handleFilterChange = (event) => {
-    const value = event.target.value;
-    setPopulation(value);
-    const numberValue = Number(value);
-    if (isNaN(numberValue) || numberValue === 0) {
+    if (!population) {
       setFilteredData(data);
     } else {
-      setFilteredData(
-        data.filter((continent) => continent.population >= numberValue)
-      );
+      const numberValue = Number(population);
+      if (isNaN(numberValue) || numberValue === 0) {
+        setFilteredData(data);
+      } else {
+        setFilteredData(data.filter((country) => country.population >= numberValue));
+      }
     }
+  }, [population, data]);
+
+  const handleFilterChange = (event) => {
+    setPopulation(event.target.value);
   };
 
   return (

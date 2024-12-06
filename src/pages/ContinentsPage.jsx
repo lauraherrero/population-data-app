@@ -1,48 +1,40 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { ChartPopulation } from "../components/ChartPopulation";
-import { fetchCountriesData } from "../helpers/utils";
+import { useDataPopulation } from "../hooks/useDataPopulation";
 
 
 export const ContinentsPage = () => {
-  const [data, setData] = useState([]);
+  const { data: countries, error } = useDataPopulation();
   const [filteredData, setFilteredData] = useState([]);
   const [population, setPopulation] = useState("");
-  const [error, setError] = useState(null);
 
   const continents = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchCountriesData();
+    if (countries.length > 0) {
+      const groupedData = continents.reduce((acc, continent) => {
+        acc[continent] = 0;
+        return acc;
+      }, {});
 
-        const groupedData = continents.reduce((acc, continent) => {
-          acc[continent] = 0;
-          return acc;
-        }, {});
+      countries.forEach((country) => {
+        const continent = country.region;
+        if (continents.includes(continent)) {
+          groupedData[continent] += country.population;
+        }
+      });
 
-        response.forEach((country) => {
-          const continent = country.region;
-          if(continents.includes(continent)) {
-            groupedData[continent] += country.population;
-          }
-        });
+      const formatData = Object.entries(groupedData).map(([region, population]) => ({
+        region,
+        population,
+      }));
 
-        const formatData = Object.entries(groupedData).map(([region, population]) => ({
-          region,
-          population,
-        }));
-
-        setData(formatData);
-        setFilteredData(formatData);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-    fetchData();
-  }, []);
+      setFilteredData(formatData);
+    }
+  }, [countries]);
 
   const handleFilterChange = (event) => {
     const value = event.target.value;
