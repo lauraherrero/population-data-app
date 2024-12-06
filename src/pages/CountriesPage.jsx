@@ -35,9 +35,10 @@ export const CountriesPage = () => {
 
   return (
     <div>
-      <h1>Countries Page</h1>
-      {error ? <h2>Error: {error}</h2> : null}
-      {loading ? <h2>Cargando...</h2> : null }
+      <h1 className="fs-2 fw-medium mt-5 text-center" style={{ color: '#2c3e50' }}>Countries Page</h1>
+      <p className="fs-5 text-muted fw-medium text-center" style={{ color: '#2c3e50' }}>Population in {name}</p>
+      {error ? <p>Error: {error}</p> : null}
+      {loading ? <p>Cargando...</p> : null }
       <FilterPopulation
         placeholder="Filter by population"
         value={population}

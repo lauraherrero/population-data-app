@@ -56,7 +56,7 @@ export const ContinentsPage = () => {
   return (
     <>
       <div>
-        <h1>Continents Page</h1>
+        <h1 className="fs-2 fw-medium my-5 text-center" style={{ color: '#2c3e50' }}>Continents Page</h1>
         {error ? <h2>Error: {error}</h2> : null}
         {loading ? <h2>Cargando...</h2> : null}
         <FilterPopulation
