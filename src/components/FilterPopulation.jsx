@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 export const FilterPopulation = ({ value, onChange, placeholder }) => {
   return (
     <div className="text-center">

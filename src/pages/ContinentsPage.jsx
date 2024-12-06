@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { ChartPopulation } from "../components/ChartPopulation";
 import { useDataPopulation } from "../hooks/useDataPopulation";
