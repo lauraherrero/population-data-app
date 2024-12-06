@@ -62,7 +62,7 @@ export const ContinentsPage = () => {
           onChange={handleFilterChange}
         />
       </div>
-      <ChartPopulation />
+      <ChartPopulation data={filteredData} />
     </>
   );
 };
