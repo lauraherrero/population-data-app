@@ -1,8 +1,31 @@
-# React + Vite
+# Population Data App 📊 🌍
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Summary 📋
 
-Currently, two official plugins are available:
+This project consists of an application that initially shows the world population distributed by continents in a bar chart. It is also possible to perform a filtering by introducing in the input values that update the information of the graphs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+In addition, it is possible to navigate to each of the continents where all the countries that compose it and the population of each one of them appear in a graph just like the main view. The filtering option is also available in this view.
+
+
+## Technology Stack 💻
+
+The application has been made from scratch with React using Vite and hooks has been used to manage different states of the application. Also bootstrap has been used for the styling part and router for the handling of the different routes through the application.
+
+<ul>
+  <li>React</li>
+  <li>Hooks</li>
+  <li>React-Router</li>
+  <li>Git</li>
+  <li>Vite</li>
+  <li>Bootstrap</li>
+</ul>
+
+## Instructions ✍
+
+### How to run:
+
+<pre>
+    <p>npm install <br></p>
+    <p>npm run dev <br></p>
+    
+</pre>
