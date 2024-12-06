@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
 import { ChartPopulation } from "../components/ChartPopulation";
 
 

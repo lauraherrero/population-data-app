@@ -24,7 +24,7 @@ export const ChartPopulation = ({ data }) => {
     datasets: [
       {
         label: "Population",
-        data,
+        data: data.map((d) => d.population),
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 210, 220, 1)",
         borderWidth: 1,

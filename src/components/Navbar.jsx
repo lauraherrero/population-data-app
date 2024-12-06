@@ -11,7 +11,11 @@ export const Navbar = () => {
     const handleChange = (e) => {
         setInputValue(e.target.value);
         const selectedContinent = e.target.value;
-        navigate(`/continent/${selectedContinent}`);
+        if (selectedContinent === 'Global') {
+            navigate('/');
+        } else {
+            navigate(`/continent/${selectedContinent}`);
+        }
     }
 
     return (
