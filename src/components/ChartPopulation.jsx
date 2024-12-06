@@ -37,7 +37,10 @@ export const ChartPopulation = ({ data, label, value }) => {
     maintainAspectRatio: false,
   };
   return (
-    <div>
+    <div
+      className="col-md-12 d-flex justify-content-center align-items-center"
+      style={{ height: "calc(100vh - 400px)", marginTop: "120px" }}
+    >
       <Bar data={chartData} options={chartOptions} />
     </div>
   );
