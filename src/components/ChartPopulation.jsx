@@ -39,7 +39,7 @@ export const ChartPopulation = ({ data, label, value }) => {
   return (
     <div
       className="col-md-12 d-flex justify-content-center align-items-center"
-      style={{ height: "calc(100vh - 450px)", marginTop: "120px" }}
+      style={{ height: "calc(100vh - 450px)", width: "calc(100% - 50px)", marginTop: "120px" }}
     >
       <Bar data={chartData} options={chartOptions} />
     </div>

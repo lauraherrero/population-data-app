@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const Navbar = () => {
 
   return (
     <div className="bg-dark text-light p-4 d-flex justify-content-between align-items-center">
-      <h1>Population Data App</h1>
+      <Link className="navbar-brand fs-2" to="/">Population Data App</Link>
       <nav className="navbar navbar-expand-sm navbar-dark mr-2">
         <select
           className="custom-select"
