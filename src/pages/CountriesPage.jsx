@@ -9,10 +9,13 @@ export const CountriesPage = () => {
   const { data, error } = useDataPopulation(name);
   const [population, setPopulation] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!population) {
+      setLoading(true);
       setFilteredData(data);
+      setLoading(false);
     } else {
       const numberValue = Number(population);
       if (isNaN(numberValue) || numberValue === 0) {
@@ -21,6 +24,7 @@ export const CountriesPage = () => {
         setFilteredData(
           data.filter((country) => country.population >= numberValue)
         );
+        setLoading(false);
       }
     }
   }, [population, data]);
@@ -33,6 +37,7 @@ export const CountriesPage = () => {
     <div>
       <h1>Countries Page</h1>
       {error ? <h2>Error: {error}</h2> : null}
+      {loading ? <h2>Cargando...</h2> : null }
       <FilterPopulation
         placeholder="Filter by population"
         value={population}

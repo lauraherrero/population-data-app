@@ -9,10 +9,12 @@ export const ContinentsPage = () => {
   const { data: countries, error } = useDataPopulation();
   const [filteredData, setFilteredData] = useState([]);
   const [population, setPopulation] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const continents = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
   useEffect(() => {
+    setLoading(true);
     if (countries.length > 0) {
       const groupedData = continents.reduce((acc, continent) => {
         acc[continent] = 0;
@@ -34,6 +36,7 @@ export const ContinentsPage = () => {
       );
 
       setFilteredData(formatData);
+      setLoading(false);
     }
   }, [countries]);
 
@@ -55,6 +58,7 @@ export const ContinentsPage = () => {
       <div>
         <h1>Continents Page</h1>
         {error ? <h2>Error: {error}</h2> : null}
+        {loading ? <h2>Cargando...</h2> : null}
         <FilterPopulation
           placeholder="Filter by population"
           value={population}

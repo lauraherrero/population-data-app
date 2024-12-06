@@ -4,8 +4,6 @@ export const Navbar = () => {
 
     const navigate = useNavigate();
 
-
-
     const handleChange = (e) => {
         const selectedContinent = e.target.value;
         if (selectedContinent === 'Global') {
