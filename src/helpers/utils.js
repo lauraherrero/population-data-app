@@ -6,11 +6,8 @@ export const fetchCountriesData = async () => {
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
-    const countries = await response.json();
-    console.log(countries);
-    
+    const countries = await response.json();    
     return countries;
-
 
   } catch (error) {
     throw error;

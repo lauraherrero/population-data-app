@@ -1,12 +1,12 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { ChartPopulation } from "../components/ChartPopulation";
 import { useDataPopulation } from "../hooks/useDataPopulation";
+import { FilterPopulation } from "../components/FilterPopulation";
 
 export const CountriesPage = () => {
   const { name } = useParams();
-  const { data, error } = useDataPopulation(name); 
+  const { data, error } = useDataPopulation(name);
   const [population, setPopulation] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
@@ -18,7 +18,9 @@ export const CountriesPage = () => {
       if (isNaN(numberValue) || numberValue === 0) {
         setFilteredData(data);
       } else {
-        setFilteredData(data.filter((country) => country.population >= numberValue));
+        setFilteredData(
+          data.filter((country) => country.population >= numberValue)
+        );
       }
     }
   }, [population, data]);
@@ -30,8 +32,8 @@ export const CountriesPage = () => {
   return (
     <div>
       <h1>Countries Page</h1>
-      <input
-        type="text"
+      {error ? <h2>Error: {error}</h2> : null}
+      <FilterPopulation
         placeholder="Filter by population"
         value={population}
         onChange={handleFilterChange}

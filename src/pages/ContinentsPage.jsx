@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { ChartPopulation } from "../components/ChartPopulation";
 import { useDataPopulation } from "../hooks/useDataPopulation";
-
+import { FilterPopulation } from "../components/FilterPopulation";
 
 export const ContinentsPage = () => {
   const { data: countries, error } = useDataPopulation();
@@ -27,10 +26,12 @@ export const ContinentsPage = () => {
         }
       });
 
-      const formatData = Object.entries(groupedData).map(([region, population]) => ({
-        region,
-        population,
-      }));
+      const formatData = Object.entries(groupedData).map(
+        ([region, population]) => ({
+          region,
+          population,
+        })
+      );
 
       setFilteredData(formatData);
     }
@@ -40,20 +41,21 @@ export const ContinentsPage = () => {
     const value = event.target.value;
     setPopulation(value);
     const numberValue = Number(value);
-    if(isNaN(numberValue) || numberValue === 0) {
+    if (isNaN(numberValue) || numberValue === 0) {
       setFilteredData(data);
     } else {
-      setFilteredData(data.filter((continent) => continent.population >= numberValue));
+      setFilteredData(
+        data.filter((continent) => continent.population >= numberValue)
+      );
     }
   };
-
 
   return (
     <>
       <div>
         <h1>Continents Page</h1>
-        <input
-          type="text"
+        {error ? <h2>Error: {error}</h2> : null}
+        <FilterPopulation
           placeholder="Filter by population"
           value={population}
           onChange={handleFilterChange}
