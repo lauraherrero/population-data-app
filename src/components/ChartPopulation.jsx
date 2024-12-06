@@ -18,13 +18,13 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export const ChartPopulation = ({ data }) => {
+export const ChartPopulation = ({ data, label, value }) => {
   const chartData = {
-    labels: data.map((d) => d.name),
+    labels: data.map((d) => d[label]),
     datasets: [
       {
         label: "Population",
-        data: data.map((d) => d.population),
+        data: data.map((d) => d[value]),
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 210, 220, 1)",
         borderWidth: 1,
