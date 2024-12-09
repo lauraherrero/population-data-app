@@ -5,6 +5,7 @@ import { FilterPopulation } from "../components/FilterPopulation";
 
 export const ContinentsPage = () => {
   const { data: countries, error } = useDataPopulation();
+  const [originalData, setOriginalData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [population, setPopulation] = useState("");
   const [loading, setLoading] = useState(true);
@@ -14,39 +15,27 @@ export const ContinentsPage = () => {
   useEffect(() => {
     setLoading(true);
     if (countries.length > 0) {
-      const groupedData = continents.reduce((acc, continent) => {
-        acc[continent] = 0;
-        return acc;
-      }, {});
+      const groupedData = continents.map((continent) => ({
+        region: continent,
+        population: countries
+        .filter((country) => country.region === continent)
+        .reduce((sum, country) => sum + country.population, 0),
+      }));
 
-      countries.forEach((country) => {
-        const continent = country.region;
-        if (continents.includes(continent)) {
-          groupedData[continent] += country.population;
-        }
-      });
-
-      const formatData = Object.entries(groupedData).map(
-        ([region, population]) => ({
-          region,
-          population,
-        })
-      );
-
-      setFilteredData(formatData);
+      setOriginalData(groupedData);
+      setFilteredData(groupedData);
       setLoading(false);
     }
   }, [countries]);
 
   const handleFilterChange = (event) => {
-    const value = event.target.value;
-    setPopulation(value);
-    const numberValue = Number(value);
+    setPopulation(event.target.value);
+    const numberValue = Number(event.target.value);
     if (isNaN(numberValue) || numberValue === 0) {
-      setFilteredData(data);
+      setFilteredData(originalData);
     } else {
       setFilteredData(
-        data.filter((continent) => continent.population >= numberValue)
+        originalData.filter((continent) => continent.population >= numberValue)
       );
     }
   };
