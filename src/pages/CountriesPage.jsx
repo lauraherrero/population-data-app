@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { ChartPopulation } from "../components/ChartPopulation";
 import { useDataPopulation } from "../hooks/useDataPopulation";
 import { FilterPopulation } from "../components/FilterPopulation";
+import { CountriesDetails } from "../components/CountriesDetails";
 
 export const CountriesPage = () => {
   const { name } = useParams();
@@ -45,6 +46,7 @@ export const CountriesPage = () => {
         onChange={handleFilterChange}
       />
       <ChartPopulation data={filteredData} label="name" value="population" />
+      <CountriesDetails data={data} />
     </div>
   );
 };

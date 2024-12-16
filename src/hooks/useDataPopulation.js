@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react"
-import { fetchCountriesData } from "../helpers/utils";
+import { fetchCountriesData } from "../fetchData/utils";
 
 export const useDataPopulation = (filterRegion) => {
 
